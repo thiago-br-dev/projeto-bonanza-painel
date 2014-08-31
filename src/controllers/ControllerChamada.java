@@ -40,4 +40,10 @@ public class ControllerChamada {
 	}
 
 	// -------------------------------------------------------------------
+	
+	public Chamada retornaSenha() throws SQLException {
+		return chamadaRepositorio.retornaSenha();
+	}
+
+	// -------------------------------------------------------------------
 }

@@ -65,10 +65,20 @@ public class Fachada {
 		return this.chamada.inserir(chamada);
 	}
 	// ---------------------------------------------------------------------
+	public Chamada retornaSenha()
+			throws SQLException {
+		return this.chamada.retornaSenha();
+	}
+	// ---------------------------------------------------------------------
 	// ************************* caixa *******************************
 	// ---------------------------------------------------------------------
 	public List<Caixa> listarCaixa() throws SQLException {
 		return this.caixa.listar();
+	}
+
+	// ---------------------------------------------------------------------
+	public Caixa retornaObjetoCaixa(int id) throws SQLException {
+		return this.caixa.retornaObjeto(id);
 	}
 
 	// ---------------------------------------------------------------------

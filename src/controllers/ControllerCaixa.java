@@ -32,5 +32,10 @@ public class ControllerCaixa {
 	}
 
 	// -------------------------------------------------------------------
+	public Caixa retornaObjeto(int id) throws SQLException {
+		return caixaRepositorio.retornaObjeto(id);
+	}
+
+	// -------------------------------------------------------------------
 
 }

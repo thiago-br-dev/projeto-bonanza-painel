@@ -7,4 +7,8 @@ import models.Caixa;
 public interface IRepositorioCaixa {
 	
 	List<Caixa> listarCaixa() throws SQLException;
+	
+	Caixa retornaObjeto(int id) throws SQLException;
+		
+	
 }

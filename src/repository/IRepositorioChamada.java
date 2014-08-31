@@ -7,4 +7,6 @@ public interface IRepositorioChamada {
 
 	
 	boolean inserirChamada(Chamada chamada) throws SQLException;
+	
+	Chamada retornaSenha() throws SQLException;
 }

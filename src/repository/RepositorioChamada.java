@@ -60,7 +60,8 @@ public class RepositorioChamada implements IRepositorioChamada {
 				chamada.setId(rs1.getInt(1));
 				chamada.setData(rs1.getString(2));
 				chamada.setHora(rs1.getString(3));
-				chamada.setCaixaId(rs1.getInt(4));
+				chamada.setEspera(rs1.getString(4));
+				chamada.setCaixaId(rs1.getInt(5));
 
 				return chamada;
 

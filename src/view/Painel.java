@@ -161,6 +161,8 @@ public class Painel extends JFrame implements Runnable {
 
 		marque.start();
 		contentPane.add(painelRodape);
+		
+		id = "0";
 
 	}
 
@@ -169,7 +171,7 @@ public class Painel extends JFrame implements Runnable {
 	public void run() {
 		while (1 == 1) {
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				fachada = Fachada.getInstance();
 				Chamada chamada = new Chamada();
 				Caixa caixa = new Caixa();
@@ -178,11 +180,11 @@ public class Painel extends JFrame implements Runnable {
 					caixa = fachada.retornaObjetoCaixa(chamada.getCaixaId());
 					System.out.println("afdaf" + caixa.getCaixa());
 
-					 //if (!id.equals(caixa.getCaixa())){
+					// if (!id.equals(caixa.getCaixa())){
 					// return caixa.getCaixa();
 						// Som.play();
 					this.numeroCaixaReal.setText(caixa.getCaixa());
-					 //}
+					// }
 
 				} catch (SQLException e) {
 					e.printStackTrace();

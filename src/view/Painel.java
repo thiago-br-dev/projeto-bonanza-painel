@@ -31,9 +31,9 @@ public class Painel extends JFrame implements Runnable {
 
 	private static Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private static Dimension dim = toolkit.getScreenSize();
-	JLabel horaData, numeroCaixaReal;
+	JLabel horaData, numeroCaixaReal, calendario;
 
-	private Color backgroundColor = Color.WHITE;
+	private Color backgroundColor = new Color(245, 249, 254);
 	private String marqueString;
 	private int marqueTime = 100;
 
@@ -134,7 +134,7 @@ public class Painel extends JFrame implements Runnable {
 		horaData.setForeground(Color.BLACK);
 		horaData.setHorizontalAlignment(SwingConstants.RIGHT);
 		horaData.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		horaData.setBounds((painelTopo.getWidth() - 520) - 10, 15, 490, 100);
+		horaData.setBounds((painelTopo.getWidth() - 520) - 140, 15, 490, 100);
 		painelTopo.add(horaData);
 
 		painelSenha = new JPanel();
@@ -145,11 +145,16 @@ public class Painel extends JFrame implements Runnable {
 
 		painelSenha.setBounds(80, 250, ((int) dim.getWidth() - (80 + 80)), 300);
 		painelSenha.setLayout(null);
+		
+		calendario = new JLabel("");
+		calendario.setIcon(new ImageIcon(Painel.class.getResource("/view/img/calendario.png")));
+		calendario.setBounds(painelTopo.getWidth() - 147, 0, 147, 130);
+		painelTopo.add(calendario);
 
-		numeroCaixaReal = new JLabel();
+		numeroCaixaReal = new JLabel("Aguarde ...");
 		numeroCaixaReal.setForeground(Color.BLACK);
 		numeroCaixaReal.setHorizontalAlignment(SwingConstants.CENTER);
-		numeroCaixaReal.setFont(new Font("Lucida Grande", Font.BOLD, 160));
+		numeroCaixaReal.setFont(new Font("Lucida Grande", Font.BOLD, 170));
 		numeroCaixaReal.setBounds(0, 50, painelSenha.getWidth(), 200);
 		painelSenha.add(numeroCaixaReal);
 
@@ -174,11 +179,6 @@ public class Painel extends JFrame implements Runnable {
 		marque.start();
 
 		contentPane.add(painelRodape);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Painel.class.getResource("/view/img/fundo_painel_02.jpg")));
-		lblNewLabel.setBounds(0, 0, 1920, 1080);
-		contentPane.add(lblNewLabel);
 		
 		id = "0";
 

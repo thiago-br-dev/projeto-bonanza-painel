@@ -200,6 +200,8 @@ public class Painel extends JFrame implements Runnable {
 					System.out.println(preferencia.get(0).getTexto());
 					if (!preferencia.get(0).getTexto().equals(validaFrase)) {
 						
+						validaFrase =preferencia.get(0).getTexto();
+						
 						marque.stop();
 						Marque marque2 = new Marque(preferencia.get(0).getTexto(), marqueTime);
 						marque2.setBackground(backgroundColor);

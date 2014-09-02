@@ -22,6 +22,7 @@ import models.Caixa;
 import models.Chamada;
 import models.Preferencia;
 import facade.Fachada;
+import javax.swing.ImageIcon;
 
 public class Painel extends JFrame implements Runnable {
 
@@ -173,6 +174,11 @@ public class Painel extends JFrame implements Runnable {
 		marque.start();
 
 		contentPane.add(painelRodape);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Painel.class.getResource("/view/img/fundo_painel_02.jpg")));
+		lblNewLabel.setBounds(0, 0, 1920, 1080);
+		contentPane.add(lblNewLabel);
 		
 		id = "0";
 

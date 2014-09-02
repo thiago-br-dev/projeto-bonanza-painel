@@ -203,12 +203,12 @@ public class Painel extends JFrame implements Runnable {
 						validaFrase =preferencia.get(0).getTexto();
 						
 						marque.stop();
-						Marque marque2 = new Marque(preferencia.get(0).getTexto(), marqueTime);
-						marque2.setBackground(backgroundColor);
-						painelRodape.add(marque2);
-						marque2.setBounds(30, 25, ((int) dim.getWidth() - (220)), 100);
-						marque2.setToolTipText("dfasdfasdfas");
-						marque2.start();
+						marque = new Marque(preferencia.get(0).getTexto(), marqueTime);
+						marque.setBackground(backgroundColor);
+						painelRodape.add(marque);
+						marque.setBounds(30, 25, ((int) dim.getWidth() - (220)), 100);
+						marque.setToolTipText("dfasdfasdfas");
+						marque.start();
 						
 					}
 				} catch (SQLException e1) {

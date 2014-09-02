@@ -37,6 +37,7 @@ public class Painel extends JFrame implements Runnable {
 	private int marqueTime = 100;
 
 	static Marque marque;
+	private static String validaFrase = "";
 
 	private String id;
 	
@@ -83,8 +84,10 @@ public class Painel extends JFrame implements Runnable {
 
 			if (preferencia.size() != 0) {
 
+				validaFrase = preferencia.get(0).getTexto();
 				marqueString = preferencia.get(0).getTexto();
 			} else {
+				validaFrase = preferencia.get(0).getTexto();
 				marqueString = "Bonanza";
 			}
 
@@ -183,7 +186,23 @@ public class Painel extends JFrame implements Runnable {
 			
 			try {
 				
+				preferencia = new ArrayList<Preferencia>();
+				try {
+					preferencia = (ArrayList<Preferencia>) fachada.listarPreferencia();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
+				
+				if (!preferencia.get(0).getTexto().equals(validaFrase)) {
+					
+					marque = new Marque(preferencia.get(0).getTexto(), marqueTime);
+					marque.setBackground(backgroundColor);
+					painelRodape.add(marque);
+					marque.setBounds(30, 25, ((int) dim.getWidth() - (220)), 100);
+					
+				}
 
 				
 				SimpleDateFormat format = new SimpleDateFormat(

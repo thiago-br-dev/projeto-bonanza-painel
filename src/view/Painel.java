@@ -39,6 +39,9 @@ public class Painel extends JFrame implements Runnable {
 	static Marque marque;
 
 	private String id;
+	
+	
+	private int segundos = 3; 
 
 	private Fachada fachada;
 	private ArrayList<Preferencia> preferencia;
@@ -71,7 +74,9 @@ public class Painel extends JFrame implements Runnable {
 	public Painel() {
 
 		fachada = Fachada.getInstance();
+		
 		preferencia = new ArrayList<Preferencia>();
+
 
 		try {
 			preferencia = (ArrayList<Preferencia>) fachada.listarPreferencia();
@@ -86,6 +91,9 @@ public class Painel extends JFrame implements Runnable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+			
+
+
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -153,13 +161,14 @@ public class Painel extends JFrame implements Runnable {
 				.setBounds(80, 600, ((int) dim.getWidth() - (80 + 80)), 130);
 		painelRodape.setLayout(null);
 
+
 		marque = new Marque(marqueString, marqueTime);
 		marque.setBackground(backgroundColor);
 		painelRodape.add(marque);
-
 		marque.setBounds(30, 25, ((int) dim.getWidth() - (220)), 100);
 
 		marque.start();
+
 		contentPane.add(painelRodape);
 		
 		id = "0";
@@ -170,7 +179,19 @@ public class Painel extends JFrame implements Runnable {
 	@Override
 	public void run() {
 		while (1 == 1) {
+			
+			
 			try {
+				
+				
+
+				
+				SimpleDateFormat format = new SimpleDateFormat(
+						"dd/MM/yyyy - HH:mm");
+						horaData.setText(format.format(new Date()));
+						painelTopo.repaint();
+						
+						
 				Thread.sleep(1000);
 				fachada = Fachada.getInstance();
 				Chamada chamada = new Chamada();
@@ -178,13 +199,35 @@ public class Painel extends JFrame implements Runnable {
 				try {
 					chamada = fachada.retornaSenha();
 					caixa = fachada.retornaObjetoCaixa(chamada.getCaixaId());
-					System.out.println("afdaf" + caixa.getCaixa());
 
-					// if (!id.equals(caixa.getCaixa())){
+					 if (!id.equals(caixa.getCaixa())){
+						 
+						 
+						  try{  
+							  
+							  
+							  
+							  this.numeroCaixaReal.setText(caixa.getCaixa());
+							  
+								 Som.play();
+								 id = caixa.getCaixa();
+								 
+						       for (int i = segundos; i > 0; i--){  
+						           System.out.println(i + " segundos");  
+						           Thread.sleep(1000); // 1 segundo  
+						       }  
+						       System.out.println("Terminei!");  
+						   } catch (InterruptedException e){  
+						       System.out.println("Interromperam meu sono!");  
+						   }  
+						 
 					// return caixa.getCaixa();
-						// Som.play();
-					this.numeroCaixaReal.setText(caixa.getCaixa());
-					// }
+
+					
+					 }
+					 else{
+						 this.numeroCaixaReal.setText("Aguarde..."); 
+					 }
 
 				} catch (SQLException e) {
 					e.printStackTrace();

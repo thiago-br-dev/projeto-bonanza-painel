@@ -68,7 +68,7 @@ public class RepositorioCaixa implements IRepositorioCaixa {
 				caixa.setCaixa(rs1.getString(2));
 				caixa.setAtendente(rs1.getString(3));
 				caixa.setDataHoraCadastro(rs1.getString(4));
-				caixa.setAdministradorId(rs1.getInt(4));
+				caixa.setAdministradorId(rs1.getInt(5));
 
 				return caixa;
 

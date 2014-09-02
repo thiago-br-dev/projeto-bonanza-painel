@@ -15,7 +15,7 @@ public class Som {
 	
 	public static void play(){
 		try {
-			AudioInputStream stream = AudioSystem.getAudioInputStream(new File("/home/glfila/Downloads/alert.wav"));
+			AudioInputStream stream = AudioSystem.getAudioInputStream(new File("c:/teste/alert.wav"));
 			DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat());
 			Clip clip = (Clip) AudioSystem.getLine(info);
 			clip.open(stream);

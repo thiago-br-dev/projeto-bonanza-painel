@@ -87,7 +87,7 @@ public class Painel extends JFrame implements Runnable {
 				validaFrase = preferencia.get(0).getTexto();
 				marqueString = preferencia.get(0).getTexto();
 			} else {
-				validaFrase = preferencia.get(0).getTexto();
+				validaFrase = "Bonanza";
 				marqueString = "Bonanza";
 			}
 
@@ -181,29 +181,37 @@ public class Painel extends JFrame implements Runnable {
 	// ----------------------------------------------------------------------
 	@Override
 	public void run() {
+		
+		fachada = Fachada.getInstance();
+		Chamada chamada = new Chamada();
+		Caixa caixa = new Caixa();
+		
 		while (1 == 1) {
-			
-			
+		
 			try {
-				
+			
 				preferencia = new ArrayList<Preferencia>();
+				
 				try {
 					preferencia = (ArrayList<Preferencia>) fachada.listarPreferencia();
+					
+					
+					System.out.println(validaFrase);
+					System.out.println(preferencia.get(0).getTexto());
+					if (!preferencia.get(0).getTexto().equals(validaFrase)) {
+						
+						marque.stop();
+						Marque marque2 = new Marque(preferencia.get(0).getTexto(), marqueTime);
+						marque2.setBackground(backgroundColor);
+						painelRodape.add(marque2);
+						marque2.setBounds(30, 25, ((int) dim.getWidth() - (220)), 100);
+						marque2.setToolTipText("dfasdfasdfas");
+						marque2.start();
+						
+					}
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				
-				if (!preferencia.get(0).getTexto().equals(validaFrase)) {
-					
-					marque = new Marque(preferencia.get(0).getTexto(), marqueTime);
-					marque.setBackground(backgroundColor);
-					painelRodape.add(marque);
-					marque.setBounds(30, 25, ((int) dim.getWidth() - (220)), 100);
-					
-				}
-
 				
 				SimpleDateFormat format = new SimpleDateFormat(
 						"dd/MM/yyyy - HH:mm");
@@ -212,9 +220,7 @@ public class Painel extends JFrame implements Runnable {
 						
 						
 				Thread.sleep(1000);
-				fachada = Fachada.getInstance();
-				Chamada chamada = new Chamada();
-				Caixa caixa = new Caixa();
+
 				try {
 					chamada = fachada.retornaSenha();
 					caixa = fachada.retornaObjetoCaixa(chamada.getCaixaId());
@@ -239,10 +245,7 @@ public class Painel extends JFrame implements Runnable {
 						   } catch (InterruptedException e){  
 						       System.out.println("Interromperam meu sono!");  
 						   }  
-						 
-					// return caixa.getCaixa();
 
-					
 					 }
 					 else{
 						 this.numeroCaixaReal.setText("Aguarde..."); 

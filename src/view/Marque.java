@@ -18,7 +18,7 @@ class Marque extends JPanel implements ActionListener {
 	private final int n;
 	private int index;
 
-	private Color marqueColor = Color.BLACK;
+	private Color marqueColor = Color.WHITE;
 	private int marqueSize = 60;
 
 	public Marque(String s, int n) {

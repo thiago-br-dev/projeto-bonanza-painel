@@ -22,6 +22,7 @@ import models.Caixa;
 import models.Chamada;
 import models.Preferencia;
 import facade.Fachada;
+
 import javax.swing.ImageIcon;
 
 public class Painel extends JFrame implements Runnable {
@@ -41,6 +42,7 @@ public class Painel extends JFrame implements Runnable {
 	private static String validaFrase = "";
 
 	private String id;
+	private int idChamada;
 	
 	
 	private int segundos = 3; 
@@ -181,6 +183,7 @@ public class Painel extends JFrame implements Runnable {
 		contentPane.add(painelRodape);
 		
 		id = "0";
+		idChamada = 0;
 
 	}
 
@@ -239,12 +242,11 @@ public class Painel extends JFrame implements Runnable {
 						  try{  
 							  
 							  
-							  
 							  this.numeroCaixaReal.setText("Caixa Livre "+caixa.getCaixa());
 							  
 								 Som.play();
 								 id = caixa.getCaixa();
-								 
+								 idChamada =  chamada.getId();
 						       for (int i = segundos; i > 0; i--){  
 						           System.out.println(i + " segundos");  
 						           Thread.sleep(1000); // 1 segundo  
@@ -254,6 +256,35 @@ public class Painel extends JFrame implements Runnable {
 						       System.out.println("Interromperam meu sono!");  
 						   }  
 
+					 }
+					 
+					 if (id.equals(caixa.getCaixa())){
+						 
+						 
+						 if (chamada.getId() == idChamada+1){
+						  try{  
+							  
+							  
+							  this.numeroCaixaReal.setText("Caixa Livre "+caixa.getCaixa());
+							  
+								 Som.play();
+								 id = caixa.getCaixa();
+								 idChamada =  chamada.getId();
+								 
+						       for (int i = segundos; i > 0; i--){  
+						           System.out.println(i + " segundos");  
+						           Thread.sleep(1000); // 1 segundo  
+						       }  
+						       System.out.println("Terminei!");  
+						   } catch (InterruptedException e){  
+						       System.out.println("Interromperam meu sono!");  
+						   }  
+						  
+						 }
+						 else{
+							 this.numeroCaixaReal.setText("Aguarde...");
+						 }
+						 
 					 }
 					 else{
 						 this.numeroCaixaReal.setText("Aguarde..."); 

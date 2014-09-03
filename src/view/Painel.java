@@ -99,7 +99,7 @@ public class Painel extends JFrame implements Runnable {
 		}
 			
 
-
+		
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -123,6 +123,11 @@ public class Painel extends JFrame implements Runnable {
 		painelTopo.setLayout(null);
 
 		contentPane.add(painelTopo);
+		
+		JLabel calendario = new JLabel("");
+		calendario.setIcon(new ImageIcon(Painel.class.getResource("/view/img/calendario.png")));
+		calendario.setBounds(painelTopo.getWidth() - 147, 0, 147, 130);
+		painelTopo.add(calendario);
 
 		JLabel fraseInicio = new JLabel("BONANZA SUPERMERCADOS");
 		fraseInicio.setForeground(Color.BLACK);

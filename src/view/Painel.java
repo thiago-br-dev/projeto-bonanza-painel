@@ -146,10 +146,10 @@ public class Painel extends JFrame implements Runnable {
 		painelSenha.setBounds(80, 250, ((int) dim.getWidth() - (80 + 80)), 300);
 		painelSenha.setLayout(null);
 		
-		calendario = new JLabel("");
+		/*calendario = new JLabel("");
 		calendario.setIcon(new ImageIcon(Painel.class.getResource("/view/img/calendario.png")));
 		calendario.setBounds(painelTopo.getWidth() - 147, 0, 147, 130);
-		painelTopo.add(calendario);
+		painelTopo.add(calendario);*/
 
 		numeroCaixaReal = new JLabel("Aguarde ...");
 		numeroCaixaReal.setForeground(Color.BLACK);
@@ -240,7 +240,7 @@ public class Painel extends JFrame implements Runnable {
 							  
 							  
 							  
-							  this.numeroCaixaReal.setText(caixa.getCaixa());
+							  this.numeroCaixaReal.setText("Caixa Livre "+caixa.getCaixa());
 							  
 								 Som.play();
 								 id = caixa.getCaixa();

@@ -155,7 +155,7 @@ public class Painel extends JFrame implements Runnable {
 		 * painelTopo.add(calendario);
 		 */
 
-		numeroCaixaReal = new JLabel("CAIXA LIVRE - 03");
+		numeroCaixaReal = new JLabel("AGUARDE");
 		numeroCaixaReal.setForeground(Color.WHITE);
 		numeroCaixaReal.setHorizontalAlignment(SwingConstants.CENTER);
 		numeroCaixaReal.setFont(new Font("DS-Digital", numeroCaixaReal.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 175));
@@ -212,6 +212,9 @@ public class Painel extends JFrame implements Runnable {
 							.listarPreferencia();
 
 					System.out.println(validaFrase);
+					
+					if (preferencia.size() != 0){
+					
 					if (!preferencia.get(0).getTexto().equals(validaFrase)) {
 
 						validaFrase = preferencia.get(0).getTexto();
@@ -221,6 +224,11 @@ public class Painel extends JFrame implements Runnable {
 						marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
 						contentPane.add(marque);
 
+					}
+					}
+					else{
+						validaFrase = "Bonanza";
+						marqueString = "Bonanza";
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();

@@ -211,7 +211,6 @@ public class Painel extends JFrame implements Runnable {
 					
 					
 					System.out.println(validaFrase);
-					System.out.println(preferencia.get(0).getTexto());
 					if (!preferencia.get(0).getTexto().equals(validaFrase)) {
 						
 						validaFrase =preferencia.get(0).getTexto();

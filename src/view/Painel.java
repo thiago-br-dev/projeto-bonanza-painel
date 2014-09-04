@@ -37,7 +37,7 @@ public class Painel extends JFrame implements Runnable {
 	private String marqueString;
 	private int marqueTime = 100;
 
-	static Marque marque;
+	static JLabel marque;
 	private static String validaFrase = "";
 
 	private String id;
@@ -155,10 +155,10 @@ public class Painel extends JFrame implements Runnable {
 		 * painelTopo.add(calendario);
 		 */
 
-		numeroCaixaReal = new JLabel("AGUARDE");
+		numeroCaixaReal = new JLabel("CAIXA LIVRE - 03");
 		numeroCaixaReal.setForeground(Color.WHITE);
 		numeroCaixaReal.setHorizontalAlignment(SwingConstants.CENTER);
-		numeroCaixaReal.setFont(new Font("Lucida Grande", Font.BOLD, 120));
+		numeroCaixaReal.setFont(new Font("DS-Digital", numeroCaixaReal.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 175));
 		numeroCaixaReal.setBounds(0, 75, painelSenha.getWidth(), 200);
 		painelSenha.add(numeroCaixaReal);
 
@@ -170,10 +170,12 @@ public class Painel extends JFrame implements Runnable {
 		label_1.setBounds(0, 0, 1920, 566);
 		painelSenha.add(label_1);
 
-		marque = new Marque(marqueString, marqueTime);
+		marque = new JLabel("BONANZA SUPERMERCADOS");
+		marque.setForeground(Color.WHITE);
+		marque.setHorizontalAlignment(SwingConstants.CENTER);
+		marque.setFont(new Font("Arial", Font.PLAIN, 48));
 		marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
 		contentPane.add(marque);
-		marque.start();
 		
 		label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(Painel.class.getResource("/view/img/bonanza_logo_media.png")));
@@ -214,13 +216,10 @@ public class Painel extends JFrame implements Runnable {
 
 						validaFrase = preferencia.get(0).getTexto();
 
-						marque.stop();
-						marque = new Marque(preferencia.get(0).getTexto(),
+						marque = new JLabel(preferencia.get(0).getTexto(),
 								marqueTime);
+						marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
 						contentPane.add(marque);
-						marque.setBounds(30, 25,
-								((int) dim.getWidth() - (220)), 100);
-						marque.start();
 
 					}
 				} catch (SQLException e1) {

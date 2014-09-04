@@ -42,7 +42,7 @@ public class RepositorioChamada implements IRepositorioChamada {
 	public Chamada retornaSenha() throws SQLException {
 		Chamada chamada;
 
-		String dataSistema = new SimpleDateFormat("dd/MM/yyyy")
+		String dataSistema = new SimpleDateFormat("yyyy-MM-dd")
 		.format(new Date());
 		
 		String sql = "SELECT * FROM chamada WHERE data='"+dataSistema+"'  ORDER BY `id` DESC LIMIT 1";

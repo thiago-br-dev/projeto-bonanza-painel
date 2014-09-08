@@ -28,16 +28,16 @@ import javax.swing.ImageIcon;
 public class Painel extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel contentPane, painelTopo, painelSenha, painelRodape;
+	private JPanel contentPane, painelTopo, painelSenha;
 
 	private static Toolkit toolkit = Toolkit.getDefaultToolkit();
 	private static Dimension dim = toolkit.getScreenSize();
 	JLabel horaData, numeroCaixaReal, calendario;
 
-	private String marqueString;
 	private int marqueTime = 100;
 
-	static JLabel marque;
+	static JLabel fundo_frase;
+	private Marque marque;
 	private static String validaFrase = "";
 
 	private String id;
@@ -87,10 +87,9 @@ public class Painel extends JFrame implements Runnable {
 			if (preferencia.size() != 0) {
 
 				validaFrase = preferencia.get(0).getTexto();
-				marqueString = preferencia.get(0).getTexto();
+				preferencia.get(0).getTexto();
 			} else {
 				validaFrase = "Bonanza";
-				marqueString = "Bonanza";
 			}
 
 		} catch (SQLException e) {
@@ -134,14 +133,6 @@ public class Painel extends JFrame implements Runnable {
 		fraseInicio.setBounds(30, 15, 600, 100);
 		painelTopo.add(fraseInicio);
 
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
-		horaData = new JLabel(format.format(new Date()));
-		horaData.setForeground(Color.BLACK);
-		horaData.setHorizontalAlignment(SwingConstants.RIGHT);
-		horaData.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		horaData.setBounds((painelTopo.getWidth() - 520) - 140, 15, 490, 100);
-		painelTopo.add(horaData);
-
 		painelSenha = new JPanel();
 		painelSenha.setBackground(new Color(245, 249, 254));
 		painelSenha.setBounds(0, (int) (dim.getHeight() / 2) - 175,
@@ -155,10 +146,10 @@ public class Painel extends JFrame implements Runnable {
 		 * painelTopo.add(calendario);
 		 */
 
-		numeroCaixaReal = new JLabel("AGUARDE");
+		numeroCaixaReal = new JLabel("CAIXA LIVRE - 03");
 		numeroCaixaReal.setForeground(Color.WHITE);
 		numeroCaixaReal.setHorizontalAlignment(SwingConstants.CENTER);
-		numeroCaixaReal.setFont(new Font("DS-Digital", numeroCaixaReal.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 175));
+		numeroCaixaReal.setFont(new Font("DS-Digital", numeroCaixaReal.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 220));
 		numeroCaixaReal.setBounds(0, 75, painelSenha.getWidth(), 200);
 		painelSenha.add(numeroCaixaReal);
 
@@ -170,17 +161,29 @@ public class Painel extends JFrame implements Runnable {
 		label_1.setBounds(0, 0, 1920, 566);
 		painelSenha.add(label_1);
 
-		marque = new JLabel("BONANZA SUPERMERCADOS");
-		marque.setForeground(Color.WHITE);
-		marque.setHorizontalAlignment(SwingConstants.CENTER);
-		marque.setFont(new Font("Arial", Font.PLAIN, 48));
+		marque = new Marque("Bonanza Supermercados - Tá tudo Aqui !", marqueTime);
+		marque.setBackground(Color.BLACK);
 		marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
+		marque.start();
 		contentPane.add(marque);
+		
+		fundo_frase = new JLabel();
+		fundo_frase.setIcon(new ImageIcon(Painel.class.getResource("/view/img/fundo_frase.png")));
+		fundo_frase.setBounds(0, (int) dim.getHeight() - 206, ((int) dim.getWidth()), 206);
+		contentPane.add(fundo_frase);
 		
 		label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(Painel.class.getResource("/view/img/bonanza_logo_media.png")));
 		label_2.setBounds((int) (dim.getWidth() / 2) - 297, (int) (dim.getHeight() / 2) - 300, 595, 73);
 		contentPane.add(label_2);
+		
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+		horaData = new JLabel(format.format(new Date()));
+		horaData.setForeground(Color.WHITE);
+		horaData.setHorizontalAlignment(SwingConstants.CENTER);
+		horaData.setFont(new Font("DS-Digital", horaData.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 100));
+		horaData.setBounds(0, (int) (dim.getHeight() / 2) - 450, (int) dim.getWidth(), 100);
+		contentPane.add(horaData);
 
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(Painel.class
@@ -219,16 +222,14 @@ public class Painel extends JFrame implements Runnable {
 
 						validaFrase = preferencia.get(0).getTexto();
 
-						marque = new JLabel(preferencia.get(0).getTexto(),
-								marqueTime);
+						marque = new Marque(validaFrase, 10);
 						marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
 						contentPane.add(marque);
 
 					}
 					}
 					else{
-						validaFrase = "Bonanza";
-						marqueString = "Bonanza";
+						validaFrase = "Bonanza Supermercados - Tá tudo Aqui !";
 					}
 				} catch (SQLException e1) {
 					e1.printStackTrace();

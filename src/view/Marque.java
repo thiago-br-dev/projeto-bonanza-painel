@@ -41,6 +41,12 @@ class Marque extends JPanel implements ActionListener {
         label.setText(sb.toString());
         this.add(label);
     }
+    
+    public void setText(String frase) {
+    	
+    	label.setText(frase);
+    	
+    }
 
     public void start() {
         timer.start();

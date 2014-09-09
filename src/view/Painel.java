@@ -77,25 +77,6 @@ public class Painel extends JFrame implements Runnable {
 
 	public Painel() {
 
-		fachada = Fachada.getInstance();
-
-		preferencia = new ArrayList<Preferencia>();
-
-		try {
-			preferencia = (ArrayList<Preferencia>) fachada.listarPreferencia();
-
-			if (preferencia.size() != 0) {
-
-				validaFrase = preferencia.get(0).getTexto();
-				preferencia.get(0).getTexto();
-			} else {
-				validaFrase = "Bonanza";
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setExtendedState(MAXIMIZED_BOTH);
@@ -161,7 +142,26 @@ public class Painel extends JFrame implements Runnable {
 		label_1.setBounds(0, 0, 1920, 566);
 		painelSenha.add(label_1);
 
-		marque = new Marque("Bonanza Supermercados - Tá tudo Aqui !", marqueTime);
+		fachada = Fachada.getInstance();
+
+		preferencia = new ArrayList<Preferencia>();
+
+		try {
+			preferencia = (ArrayList<Preferencia>) fachada.listarPreferencia();
+
+			if (preferencia.size() != 0) {
+
+				validaFrase = preferencia.get(0).getTexto();
+				preferencia.get(0).getTexto();
+			} else {
+				validaFrase = "Bonanza Supermercados - Tá tudo Aqui !";
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		marque = new Marque(validaFrase, marqueTime);
 		marque.setBackground(Color.BLACK);
 		marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
 		marque.start();
@@ -213,8 +213,6 @@ public class Painel extends JFrame implements Runnable {
 				try {
 					preferencia = (ArrayList<Preferencia>) fachada
 							.listarPreferencia();
-
-					System.out.println(validaFrase);
 					
 					if (preferencia.size() != 0){
 					
@@ -222,8 +220,11 @@ public class Painel extends JFrame implements Runnable {
 
 						validaFrase = preferencia.get(0).getTexto();
 
-						marque = new Marque(validaFrase, 10);
+						marque.setVisible(false);
+						marque = new Marque(validaFrase, 100);
+						marque.setBackground(Color.BLACK);
 						marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
+						marque.start();
 						contentPane.add(marque);
 
 					}

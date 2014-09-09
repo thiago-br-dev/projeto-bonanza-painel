@@ -76,6 +76,7 @@ public class Painel extends JFrame implements Runnable {
 	}
 
 	public Painel() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Painel.class.getResource("/view/img/icon_screen.png")));
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

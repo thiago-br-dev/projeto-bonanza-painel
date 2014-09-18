@@ -5,10 +5,22 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -258,6 +270,37 @@ public class Painel extends JFrame implements Runnable {
 							Som.play();
 							id = caixa.getCaixa();
 							idChamada = chamada.getId();
+							
+							//aqui
+							//-------------------------------------------------------------------------------
+							 try { 
+								 URL url = new URL("http://www.tecksoft.com.br/gcm/gcm_engine.php"); 
+								 URLConnection conn = url.openConnection(); 
+
+								 //POST DATA 
+								 String data = URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode("Solicitação Caixa " + caixa.getCaixa(), "UTF-8"); 
+								 data += "&" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("AIzaSyDWY_6iTpTBAoYEI_EhsRYdBN-1luIdyL8", "UTF-8"); 
+								 data += "&" + URLEncoder.encode("registrationIDs", "UTF-8") + "=" + URLEncoder.encode("APA91bE7QEcm7NAg85Ztc4-g_nBz2UAp2ozdF2rB5LDaudFNE16POxbYCgHKUP17VG4M8ivzDf9700IJ70i4ZgJT1ehtK9qIvIg9Ps54V1AbuSYX6bkIPBtE7kTVAiw8uG_BPGKaekbdl2rZlK8Qz5RXWYCehgCFUtMuM12emLJmx5_vQ4zMMvg", "UTF-8"); 
+
+								 conn.setDoOutput(true); 
+								 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream()); 
+								 wr.write(data); 
+								 wr.flush(); 
+
+								 BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream())); 
+								 String line; 
+								 while ((line = rd.readLine()) != null) { 
+								 System.out.println(line); 
+								 } 
+								 wr.close(); 
+								 rd.close(); 
+								 } catch (Exception e) { 
+								 }
+							
+							//--------------------------------------------------------------------------------
+							
+							
+							
 							for (int i = segundos; i > 0; i--) {
 								System.out.println(i + " segundos");
 								Thread.sleep(1000); // 1 segundo

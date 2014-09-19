@@ -36,6 +36,7 @@ import models.Preferencia;
 import facade.Fachada;
 
 import javax.swing.ImageIcon;
+import java.awt.Frame;
 
 public class Painel extends JFrame implements Runnable {
 
@@ -88,49 +89,23 @@ public class Painel extends JFrame implements Runnable {
 	}
 
 	public Painel() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Painel.class.getResource("/view/img/icon_screen.png")));
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		setExtendedState(MAXIMIZED_BOTH);
+		setBounds(100, 100, 800, 500);
 		setTitle("Painel - Bonanza Supermercados");
 		setLocationRelativeTo(null);
-		setUndecorated(true);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		painelTopo = new JPanel();
-		painelTopo.setBackground(new Color(245, 249, 254));
-
-		painelTopo.setBorder(BorderFactory.createLineBorder(new Color(192, 191,
-				191)));
-
-		painelTopo.setBounds(80, 70, ((int) dim.getWidth() - (80 + 80)), 130);
-		painelTopo.setVisible(false);
-		painelTopo.setLayout(null);
-
-		contentPane.add(painelTopo);
-
-		JLabel calendario = new JLabel("");
-		calendario.setIcon(new ImageIcon(Painel.class
-				.getResource("/view/img/calendario.png")));
-		calendario.setBounds(painelTopo.getWidth() - 147, 0, 147, 130);
-		painelTopo.add(calendario);
-
-		JLabel fraseInicio = new JLabel("BONANZA SUPERMERCADOS");
-		fraseInicio.setForeground(Color.BLACK);
-		fraseInicio.setHorizontalAlignment(SwingConstants.LEFT);
-		fraseInicio.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		fraseInicio.setBounds(30, 15, 600, 100);
-		painelTopo.add(fraseInicio);
-
 		painelSenha = new JPanel();
 		painelSenha.setBackground(new Color(245, 249, 254));
-		painelSenha.setBounds(0, (int) (dim.getHeight() / 2) - 175,
-				((int) dim.getWidth()), 350);
+		painelSenha.setBounds(0, 225,
+				1280, 189);
 		painelSenha.setLayout(null);
 
 		/*
@@ -143,8 +118,8 @@ public class Painel extends JFrame implements Runnable {
 		numeroCaixaReal = new JLabel("CAIXA LIVRE - 03");
 		numeroCaixaReal.setForeground(Color.WHITE);
 		numeroCaixaReal.setHorizontalAlignment(SwingConstants.CENTER);
-		numeroCaixaReal.setFont(new Font("DS-Digital", numeroCaixaReal.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 220));
-		numeroCaixaReal.setBounds(0, 75, painelSenha.getWidth(), 200);
+		numeroCaixaReal.setFont(new Font("DS-Digital", numeroCaixaReal.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 100));
+		numeroCaixaReal.setBounds(0, -11, 794, 200);
 		painelSenha.add(numeroCaixaReal);
 
 		contentPane.add(painelSenha);
@@ -152,7 +127,7 @@ public class Painel extends JFrame implements Runnable {
 		label_1 = new JLabel("");
 		label_1.setIcon(new ImageIcon(Painel.class
 				.getResource("/view/img/fundo_senha_caixa.jpg")));
-		label_1.setBounds(0, 0, 1920, 566);
+		label_1.setBounds(0, -11, 900, 200);
 		painelSenha.add(label_1);
 
 		fachada = Fachada.getInstance();
@@ -187,15 +162,15 @@ public class Painel extends JFrame implements Runnable {
 		
 		label_2 = new JLabel("");
 		label_2.setIcon(new ImageIcon(Painel.class.getResource("/view/img/bonanza_logo_media.png")));
-		label_2.setBounds((int) (dim.getWidth() / 2) - 297, (int) (dim.getHeight() / 2) - 300, 595, 73);
+		label_2.setBounds(108, 111, 595, 73);
 		contentPane.add(label_2);
 		
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
 		horaData = new JLabel(format.format(new Date()));
 		horaData.setForeground(Color.WHITE);
 		horaData.setHorizontalAlignment(SwingConstants.CENTER);
-		horaData.setFont(new Font("DS-Digital", horaData.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 100));
-		horaData.setBounds(0, (int) (dim.getHeight() / 2) - 450, (int) dim.getWidth(), 100);
+		horaData.setFont(new Font("DS-Digital", horaData.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 50));
+		horaData.setBounds(0, 0, 784, 100);
 		contentPane.add(horaData);
 
 		JLabel label = new JLabel("");

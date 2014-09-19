@@ -45,7 +45,9 @@ public class RepositorioChamada implements IRepositorioChamada {
 		String dataSistema = new SimpleDateFormat("yyyy-MM-dd")
 		.format(new Date());
 		
-		String sql = "SELECT * FROM chamada WHERE data='"+dataSistema+"'  ORDER BY `id` DESC LIMIT 1";
+		String horaSistema = new SimpleDateFormat("HH:mm:ss").format(new Date());
+		
+		String sql = "SELECT * FROM chamada WHERE data='"+dataSistema+"' AND hora <='"+horaSistema+"'  ORDER BY `hora` DESC LIMIT 1";
 
 		try {
 			Connection conIntranet = new ConnectionFactory()

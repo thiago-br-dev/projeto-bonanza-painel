@@ -36,6 +36,7 @@ import models.Preferencia;
 import facade.Fachada;
 
 import javax.swing.ImageIcon;
+
 import java.awt.Frame;
 
 public class Painel extends JFrame implements Runnable {
@@ -59,7 +60,6 @@ public class Painel extends JFrame implements Runnable {
 	private int segundos = 3;
 
 	private Fachada fachada;
-	private ArrayList<Preferencia> preferencia;
 	private JLabel label_1;
 	private JLabel label_2;
 
@@ -115,10 +115,10 @@ public class Painel extends JFrame implements Runnable {
 		 * painelTopo.add(calendario);
 		 */
 
-		numeroCaixaReal = new JLabel("CAIXA LIVRE - 03");
+		numeroCaixaReal = new JLabel("NENHUMA SOLICITACAO");
 		numeroCaixaReal.setForeground(Color.WHITE);
 		numeroCaixaReal.setHorizontalAlignment(SwingConstants.CENTER);
-		numeroCaixaReal.setFont(new Font("DS-Digital", numeroCaixaReal.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 100));
+		numeroCaixaReal.setFont(new Font("DS-Digital", numeroCaixaReal.getFont().getStyle() & ~Font.BOLD & ~Font.ITALIC, 80));
 		numeroCaixaReal.setBounds(0, -11, 794, 200);
 		painelSenha.add(numeroCaixaReal);
 
@@ -130,30 +130,6 @@ public class Painel extends JFrame implements Runnable {
 		label_1.setBounds(0, -11, 900, 200);
 		painelSenha.add(label_1);
 
-		fachada = Fachada.getInstance();
-
-		preferencia = new ArrayList<Preferencia>();
-
-		try {
-			preferencia = (ArrayList<Preferencia>) fachada.listarPreferencia();
-
-			if (preferencia.size() != 0) {
-
-				validaFrase = preferencia.get(0).getTexto();
-				preferencia.get(0).getTexto();
-			} else {
-				validaFrase = "Bonanza Supermercados - Tá tudo Aqui !";
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		marque = new Marque(validaFrase, marqueTime);
-		marque.setBackground(Color.BLACK);
-		marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
-		marque.start();
-		contentPane.add(marque);
 		
 		fundo_frase = new JLabel();
 		fundo_frase.setIcon(new ImageIcon(Painel.class.getResource("/view/img/fundo_frase.png")));
@@ -194,44 +170,17 @@ public class Painel extends JFrame implements Runnable {
 
 		while (1 == 1) {
 
-			try {
-
-				preferencia = new ArrayList<Preferencia>();
-
-				try {
-					preferencia = (ArrayList<Preferencia>) fachada
-							.listarPreferencia();
-					
-					if (preferencia.size() != 0){
-					
-					if (!preferencia.get(0).getTexto().equals(validaFrase)) {
-
-						validaFrase = preferencia.get(0).getTexto();
-
-						marque.setVisible(false);
-						marque = new Marque(validaFrase, 100);
-						marque.setBackground(Color.BLACK);
-						marque.setBounds(0, (int) dim.getHeight() - 100, ((int) dim.getWidth()), 100);
-						marque.start();
-						contentPane.add(marque);
-
-					}
-					}
-					else{
-						validaFrase = "Bonanza Supermercados - Tá tudo Aqui !";
-					}
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-
 				SimpleDateFormat format = new SimpleDateFormat(
 						"dd/MM/yyyy - HH:mm");
 				horaData.setText(format.format(new Date()));
-				painelTopo.repaint();
 
-				Thread.sleep(1000);
+				contentPane.repaint();
+				
 
 				try {
+					
+					
+					Thread.sleep(1000);
 					chamada = fachada.retornaSenha();
 					caixa = fachada.retornaObjetoCaixa(chamada.getCaixaId());
 
@@ -239,7 +188,7 @@ public class Painel extends JFrame implements Runnable {
 
 						try {
 
-							this.numeroCaixaReal.setText("CAIXA LIVRE - "
+							this.numeroCaixaReal.setText("SOLICITACAO CAIXA - "
 									+ caixa.getCaixa());
 
 							Som.play();
@@ -291,13 +240,41 @@ public class Painel extends JFrame implements Runnable {
 						if (chamada.getId() == idChamada + 1) {
 							try {
 
-								this.numeroCaixaReal.setText("CAIXA LIVRE - "
+								this.numeroCaixaReal.setText("SOLICITACAO CAIXA - "
 										+ caixa.getCaixa());
 
 								Som.play();
 								id = caixa.getCaixa();
 								idChamada = chamada.getId();
 
+								//aqui
+								//-------------------------------------------------------------------------------
+								 try { 
+									 URL url = new URL("http://www.tecksoft.com.br/gcm/gcm_engine.php"); 
+									 URLConnection conn = url.openConnection(); 
+
+									 //POST DATA 
+									 String data = URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode("Solicitação Caixa " + caixa.getCaixa(), "UTF-8"); 
+									 data += "&" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("AIzaSyDWY_6iTpTBAoYEI_EhsRYdBN-1luIdyL8", "UTF-8"); 
+									 data += "&" + URLEncoder.encode("registrationIDs", "UTF-8") + "=" + URLEncoder.encode("APA91bE7QEcm7NAg85Ztc4-g_nBz2UAp2ozdF2rB5LDaudFNE16POxbYCgHKUP17VG4M8ivzDf9700IJ70i4ZgJT1ehtK9qIvIg9Ps54V1AbuSYX6bkIPBtE7kTVAiw8uG_BPGKaekbdl2rZlK8Qz5RXWYCehgCFUtMuM12emLJmx5_vQ4zMMvg", "UTF-8"); 
+
+									 conn.setDoOutput(true); 
+									 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream()); 
+									 wr.write(data); 
+									 wr.flush(); 
+
+									 BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream())); 
+									 String line; 
+									 while ((line = rd.readLine()) != null) { 
+									 System.out.println(line); 
+									 } 
+									 wr.close(); 
+									 rd.close(); 
+									 } catch (Exception e) { 
+									 }
+								
+								//--------------------------------------------------------------------------------
+								
 								for (int i = segundos; i > 0; i--) {
 									System.out.println(i + " segundos");
 									Thread.sleep(1000); // 1 segundo
@@ -306,20 +283,19 @@ public class Painel extends JFrame implements Runnable {
 							}
 
 						} else {
-							this.numeroCaixaReal.setText("AGUARDE");
+							this.numeroCaixaReal.setText("NENHUMA SOLICITACAO");
 						}
 
 					} else {
-						this.numeroCaixaReal.setText("AGUARDE");
+						this.numeroCaixaReal.setText("NENHUMA SOLICITACAO");
 					}
 
 				} catch (SQLException e) {
 					e.printStackTrace();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 
 		}
 	}

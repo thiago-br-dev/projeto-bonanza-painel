@@ -7,6 +7,7 @@ public class ConnectionFactory {
 
 	private String driver = "com.mysql.jdbc.Driver";
 	private String user = "root";
+	private String senha = "";
 	public static String ipServidor = "localhost";
 	
 	// ---------------------------------------------------------------------------
@@ -18,7 +19,7 @@ public class ConnectionFactory {
 		//String url = "jdbc:mysql://localhost:3306/teste";
 		try {
 			Class.forName(driver);
-			return (Connection) DriverManager.getConnection(url, "root", "");
+			return (Connection) DriverManager.getConnection(url, user, senha);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

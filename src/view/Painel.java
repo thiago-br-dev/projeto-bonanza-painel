@@ -6,38 +6,26 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
-import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import som.Som;
 import models.Caixa;
 import models.Chamada;
-import models.Preferencia;
+import som.Som;
 import facade.Fachada;
-
-import javax.swing.ImageIcon;
-
-import java.awt.Frame;
 
 public class Painel extends JFrame implements Runnable {
 
@@ -62,31 +50,6 @@ public class Painel extends JFrame implements Runnable {
 	private Fachada fachada;
 	private JLabel label_1;
 	private JLabel label_2;
-
-	public static void main(String[] args) {
-
-		EventQueue.invokeLater(new Runnable() {
-
-			public void run() {
-
-				try {
-
-					Painel frame = new Painel();
-					frame.setVisible(true);
-
-				}
-
-				catch (Exception e) {
-
-					e.printStackTrace();
-
-				}
-
-			}
-
-		});
-
-	}
 
 	public Painel() {
 		setResizable(false);
@@ -182,8 +145,12 @@ public class Painel extends JFrame implements Runnable {
 					
 					Thread.sleep(1000);
 					chamada = fachada.retornaSenha();
-					caixa = fachada.retornaObjetoCaixa(chamada.getCaixaId());
+					
+					
+					if (chamada != null){
 
+						caixa = fachada.retornaObjetoCaixa(chamada.getCaixaId());
+						
 					if (!id.equals(caixa.getCaixa())) {
 
 						try {
@@ -256,7 +223,7 @@ public class Painel extends JFrame implements Runnable {
 									 //POST DATA 
 									 String data = URLEncoder.encode("message", "UTF-8") + "=" + URLEncoder.encode("Solicitação Caixa " + caixa.getCaixa(), "UTF-8"); 
 									 data += "&" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("AIzaSyDWY_6iTpTBAoYEI_EhsRYdBN-1luIdyL8", "UTF-8"); 
-									 data += "&" + URLEncoder.encode("registrationIDs", "UTF-8") + "=" + URLEncoder.encode("APA91bE7QEcm7NAg85Ztc4-g_nBz2UAp2ozdF2rB5LDaudFNE16POxbYCgHKUP17VG4M8ivzDf9700IJ70i4ZgJT1ehtK9qIvIg9Ps54V1AbuSYX6bkIPBtE7kTVAiw8uG_BPGKaekbdl2rZlK8Qz5RXWYCehgCFUtMuM12emLJmx5_vQ4zMMvg", "UTF-8"); 
+									 data += "&" + URLEncoder.encode("registrationIDs", "UTF-8") + "=" + URLEncoder.encode("APA91bFGXAfmCn180RiKCTEtxvVQ7l51IQMQVvByRTJDklSqXwP9L5O-GRhnwsvZPflvvLr6Im78CFSapjigqy2QeahnVIDEDzo48p7uCJ-3fwfL3J9TZ-20nmmlusNRTWkvqrQrtERcDsbbu_c5My8f5OTJ_4K0aQ", "UTF-8"); 
 
 									 conn.setDoOutput(true); 
 									 OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream()); 
@@ -289,6 +256,11 @@ public class Painel extends JFrame implements Runnable {
 					} else {
 						this.numeroCaixaReal.setText("NENHUMA SOLICITACAO");
 					}
+					
+					
+					}else{
+						this.numeroCaixaReal.setText("NENHUMA SOLICITACAO");
+					}
 
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -296,6 +268,8 @@ public class Painel extends JFrame implements Runnable {
 					e.printStackTrace();
 				}
 
+				
+		
 
 		}
 	}

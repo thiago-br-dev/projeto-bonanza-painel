@@ -1,7 +1,6 @@
 package controllers;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import models.Caixa;
 import repository.IRepositorioCaixa;
@@ -24,11 +23,6 @@ public class ControllerCaixa {
 	// -------------------------------------------------------------------
 	public ControllerCaixa(RepositorioCaixa RepositorioCaixa) {
 		this.setCaixaRepositorio(RepositorioCaixa);
-	}
-
-	// -------------------------------------------------------------------
-	public List<Caixa> listar() throws SQLException {
-		return caixaRepositorio.listarCaixa();
 	}
 
 	// -------------------------------------------------------------------

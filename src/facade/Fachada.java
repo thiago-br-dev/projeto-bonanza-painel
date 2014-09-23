@@ -10,24 +10,20 @@
 package facade;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import models.Caixa;
 import models.Chamada;
-import models.Preferencia;
 import repository.RepositorioCaixa;
 import repository.RepositorioChamada;
-import repository.RepositorioPreferencia;
 import controllers.ControllerCaixa;
 import controllers.ControllerChamada;
-import controllers.ControllerPreferencia;
 
 public class Fachada {
 
 	private static Fachada instancia;
 	private ControllerChamada chamada;
 	private ControllerCaixa caixa;
-	private ControllerPreferencia preferencia;
+
 
 	// Metodo para iniciar todos os Repositorios e controladores
 	// ---------------------------------------------------------------------
@@ -37,9 +33,7 @@ public class Fachada {
 		
 		RepositorioCaixa ra = new RepositorioCaixa();
 		caixa = new ControllerCaixa(ra);
-		
-		RepositorioPreferencia rp = new RepositorioPreferencia();
-		preferencia = new ControllerPreferencia(rp);
+
 	}
 
 	// Contrutor da classe
@@ -59,12 +53,7 @@ public class Fachada {
 	}
 	// ---------------------------------------------------------------------
 	// ************************* chamada *******************************
-	// ---------------------------------------------------------------------
-	public boolean inserirChamada(Chamada chamada)
-			throws SQLException {
-		return this.chamada.inserir(chamada);
-	}
-	// ---------------------------------------------------------------------
+	//----------------------------------------------------------------------
 	public Chamada retornaSenha()
 			throws SQLException {
 		return this.chamada.retornaSenha();
@@ -72,21 +61,10 @@ public class Fachada {
 	// ---------------------------------------------------------------------
 	// ************************* caixa *******************************
 	// ---------------------------------------------------------------------
-	public List<Caixa> listarCaixa() throws SQLException {
-		return this.caixa.listar();
-	}
-
-	// ---------------------------------------------------------------------
 	public Caixa retornaObjetoCaixa(int id) throws SQLException {
 		return this.caixa.retornaObjeto(id);
 	}
 
 	// ---------------------------------------------------------------------
-	// ************************* Preferencia *******************************
-	//----------------------------------------------------------------------
-	public List<Preferencia> listarPreferencia() throws SQLException {
-		return this.preferencia.listar();
-	}
 
-	// ---------------------------------------------------------------------
 }
